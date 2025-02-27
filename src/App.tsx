@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <Image
-        src="/imagepropsassignment/Schedule.png"
+        src="/Schedule.png"
         width="50%"
         height="50%"
       />
