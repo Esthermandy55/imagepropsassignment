@@ -10,7 +10,7 @@ const Image = (props: ImageProps) => {
       src={props.src}
       width={props.width}
       height={props.height}
-      alt="Schedule"
+      
     />
   );
 };
