@@ -1,6 +1,7 @@
 import Image from "./Image";
 import { useState, useEffect } from "react";
 import BookSearchAPI from "./BookSearchAPI.tsx";
+import ToggleTheme from "./ToggleTheme.tsx";
 
 function App() {
   const [counter, setCounter] = useState<number>(10000);
@@ -32,6 +33,9 @@ function App() {
           <h1 className="text-3xl">{counter}</h1>
         </div>
       </main>
+
+        <ToggleTheme />
+
       <div className="flex flex-row">
         <BookSearchAPI />
       </div>
