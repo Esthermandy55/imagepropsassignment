@@ -1,6 +1,7 @@
 import Image from "./Image";
 import { useState, useEffect } from "react";
 import BookSearchAPI from "./BookSearchAPI.tsx";
+import ToggleTheme from "./ToggleTheme.tsx";
 import ControlledForm from "./ControlledForm.tsx";
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
           <h1 className="text-3xl">{counter}</h1>
         </div>
       </main>
+
+        <ToggleTheme />
+
       <div className="flex flex-row">
         <BookSearchAPI />
       </div>
