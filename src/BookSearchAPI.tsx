@@ -5,20 +5,24 @@ interface BookSearchAPI {
   description: string;
   price?: number;
   image: string;
+  infoLink: string;
 }
 
 export default function BookSearchAPI() {
-  const API =
-    "https://www.googleapis.com/books/v1/volumes?q=%22chinua%20achebe%22";
   const [bookSearchAPI, setBookSearchAPI] = useState<BookSearchAPI[]>([]);
+  const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const API =
+    "https://www.googleapis.com/books/v1/volumes?q=${query}";
 
   useEffect(() => {
     const fetchData = () => {
       fetch(API)
         .then((response) => response.json())
         .then((data) => {
-          //           setBookSearchAPI(data);
-          //           console.log(data);
+          //           setBookSearchAPI(data.items);
+          //           console.log(data.items);
           //         });
           //     };
           //     fetchData();
@@ -41,22 +45,41 @@ export default function BookSearchAPI() {
         .catch((error) => console.error("Error fetching data:", error));
     };
     fetchData();
-  }, []);
+  }, [query]);
+
+  const searchBook = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setQuery(inputValue);
+
+    setInputValue("");
+  };
 
   return (
     <section>
+      <form onSubmit={searchBook} className="flex justify-center py-20">
+        <input
+          type="text"
+          placeholder="Search for Book..."
+          className="bg-white h-12 w-96 pl-3 outline-none"
+          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue}
+        />
+      </form>
       {bookSearchAPI.map((bookSearchAPI, index) => (
         <figure key={index} className="flex flex-row bg-amber-100 m-2 p-2">
           <img
-            src={bookSearchAPI.image}
+            src={bookSearchAPI.volumeInfo.image}
             alt="bookSearchAPI image"
             className="w-100vw h-100vh m-4 p-4"
           />
           <figcaption className="m-4 p-4">
-            <strong>{bookSearchAPI.title}</strong>
-            <p>{bookSearchAPI.description}</p>
-            {bookSearchAPI.price && <p>{bookSearchAPI.price}</p>}
+            <strong>{bookSearchAPI.volumeInfo.title}</strong>
+            <p>{bookSearchAPI.volumeInfo.description}</p>
+            {bookSearchAPI.volumeInfo.price && (
+              <p>{bookSearchAPI.volumeInfo.price}</p>
+            )}
             {/* <p>{bookSearchAPI.price}</p> */}
+            <a href={bookSearchAPI.volumeInfo.infoLink}>InfoLink</a>
           </figcaption>
         </figure>
       ))}

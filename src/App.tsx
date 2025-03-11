@@ -1,6 +1,7 @@
 import Image from "./Image";
 import { useState, useEffect } from "react";
 import BookSearchAPI from "./BookSearchAPI.tsx";
+import ControlledForm from "./ControlledForm.tsx";
 
 function App() {
   const [counter, setCounter] = useState<number>(10000);
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <>
+      <ControlledForm />
       <main className="h-screen w-full bg-amber-200 flex justify-center items-center gap-6">
         <Image src="/Schedule.png" width="25%" height="50%" />
         <div className="flex flex-col gap-2">
